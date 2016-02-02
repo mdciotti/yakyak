@@ -45,7 +45,7 @@ module.exports = view (models) ->
                 # while measuring and that causes the messages scroll above to
                 # move. by pinning the div of the outer holding div, we
                 # are not moving the scroller.
-                ta.parentNode.style.height = (ta.offsetHeight + 24) + 'px'
+                ta.parentNode.style.height = (ta.offsetHeight + 18) + 'px'
                 messages.scrollToBottom()
         , onkeydown: (e) ->
             if (e.metaKey or e.ctrlKey) and e.keyIdentifier == 'Up' then action 'selectNextConv', -1

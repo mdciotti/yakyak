@@ -1,3 +1,5 @@
+@import "colors";
+
 // minimal reset
 * {
     padding: 0;
@@ -17,15 +19,16 @@ html, body {
 }
 
 body {
-    background: #fff;
+    background: @bg-color;
     font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: subpixel-antialiased;
     font-weight: 300;
-    font-size: 15px;
-    letter-spacing: 0.025em;
+    font-size: 13px;
+    // letter-spacing: 0.025em;
     line-height: 20px;
+    color: @body-text;
 }
 
 h1 {
@@ -37,7 +40,7 @@ h1 {
 }
 
 ::-webkit-input-placeholder {
-    color: #ddd;
+    color: @placeholder-text;
 }
 
 input, textarea {
@@ -67,8 +70,7 @@ input, textarea {
 }
 
 a {
-    color: #3879d9;
-    text-decoration: none;
+    color: inherit;
 }
 
 body .notr {

@@ -1,45 +1,45 @@
+@import "../css/colors";
 
 .messages {
-    padding: 15px 15px 0 15px;
+    padding: 15px 15px 30px 15px;
     .historyinfo {
         height: 60px;
     }
     .tgroup {
         .timestamp {
-            margin-top: 15px;
             display: block;
-            font-size: 12px;
+            font-size: 11px;
             text-align: center;
-            color: #999;
+            color: @soft-text;
         }
         .ugroup {
-            margin-top: 17px;
-            position: relative;
+            margin-top: 6px;
+            display: flex;
+            align-items: flex-start;
             .sender {
                 text-decoration: none;
                 font-size: 11px;
-                color: #999;
+                color: @soft-text;
+                line-height: 1;
                 img {
                     border: none;
                     width: 35px;
                     height: 35px;
                     object-fit: cover;
-                    position: absolute;
-                    top: 5px;
-                    left: 0;
                     border-radius: 50%;
                 }
                 span {
-                    margin-left: 45px;
+                    display: none;
                 }
             }
             @radius: 13px;
             .umessages {
-                margin-top: -1px;
-                margin-left: 45px;
-                display: table;
+                position: relative;
+                padding: 6px 10px;
+                border-radius: 5px;
+                margin-left: 5px;
+                background: @message-color;
                 .message {
-                    padding-bottom: 5px;
                     white-space: pre-wrap;
                     &.placeholder {
                         opacity: 0.5;
@@ -50,7 +50,6 @@
                     img {
                         max-height: 350px;
                         max-width: 100%;
-                        border-radius: 8px;
                     }
                     a {
                         word-break: break-word;
@@ -58,18 +57,33 @@
                     &.conversation_rename,
                     &.membership_change {
                         font-style: italic;
-                        color: #999;
+                        color: @soft-text;
                         font-size: 0.9em;
                     }
                 }
+                &::before {
+                    content: '';
+                    height: 0;
+                    width: 0;
+                    border-top: 5px solid @message-color;
+                    border-left: 5px solid transparent;
+                    border-right: 5px solid transparent;
+                    position: absolute;
+                    left: -5px;
+                    top: 0;
+                }
             }
             &.self {
-                //direction: rtl;
+                flex-direction: row-reverse;
                 .sender {
+                    display: none;
                 }
                 .umessages {
-                    //direction: ltr;
-                    .message {
+                    background: @selfmessage-color;
+                    &::before {
+                        left: auto;
+                        right: -5px;
+                        border-top: 5px solid @selfmessage-color;
                     }
                 }
             }

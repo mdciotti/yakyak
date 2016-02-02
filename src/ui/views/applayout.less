@@ -1,3 +1,4 @@
+@import "../css/colors";
 
 .applayout {
     display: flex;
@@ -54,11 +55,14 @@
         }
         > .maininfo {
             flex: none;
+            position: absolute;
+            transform: translateY(-20px);
+            overflow: hidden;
         }
         > .foot {
             flex: none;
-            background: #f6f6f6;
-            border-top: 1px solid #b4b4b4;
+            background: @inputbar-color;
+            box-shadow: 0 -7px 7px -5px rgba(0,0,0,0.1);
         }
     }
     > .info {
