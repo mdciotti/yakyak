@@ -1,14 +1,16 @@
+@import "../css/colors";
 
 .convlist {
+    background: @convlist-color;
     .label {
-        font-size: 9px;
-        line-height: 14px;
-        text-transform: uppercase;
-        color: #666;
-        padding-top: 6px;
-        padding-left: 7px;
-        background-color: #e3e3e3;
-        border-bottom: 1px solid #e1e1e1;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1;
+        color: @convlistlabel-text;
+        cursor: default;
+        padding: 15px 20px;
+        background-color: @convlistlabel-color;
+        border-top: 1px solid @convlistdivider-color;
     }
     .starred {
         .conv:last-child {
@@ -19,8 +21,7 @@
     }
     .conv {
         position: relative;
-        padding: 10px 15px 10px;
-        line-height: 25px;
+        padding: 15px 20px;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -30,26 +31,25 @@
             left: 15px;
             width: 100%;
             height: 1px;
-            background: #e1e1e1;
+            background: @convlistdivider-color;
         }
         &.selected {
-            background: #4271de;
-            color: #fff;
-            cursor: auto;
-            .divider {
-                display: none;
-            }
+            background: @convlistselected-color;
+            color: @convlistselected-text;
             .convtyping {
-                color: #fff;
+                color: @convlistselected-text;
                 opacity: 0.7;
             }
         }
         &.unread {
-            font-weight: 500;
+            font-weight: 600;
         }
         &.purehang {
             color: #999;
             font-style: italic;
+        }
+        &:not(.selected):hover {
+            background: @convlisthover-color;
         }
         .convname {
             flex: 1;
@@ -91,7 +91,6 @@
             img {
                 border-radius: 50%;
                 position: absolute;
-                box-shadow: 0 0 2px 1px #f0f0f0;
             }
 
             /* one image */
@@ -118,8 +117,41 @@
             }
 
         }
+        .details {
+            flex: 1 1 auto;
+            overflow: hidden;
+            span {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                display: block;
+            }
+        }
+        .time {
+            flex: none;
+            align-self: flex-start;
+            white-space: nowrap;
+        }
     }
-    &.showconvthumbs .conv .convname {
-        margin-left: 10px;
+    &.showconvthumbs .conv {
+        .convname {
+            font-size: 15px;
+        }
+        .lastmessage {
+            font-size: 12px;
+            opacity: 0.7;
+            font-weight: 500;
+        }
+        .details {
+            margin-left: 15px;
+        }
+        .divider {
+            display: none;
+        }
+        &.unread {
+            .lastmessage {
+                font-weight: 700;
+                opacity: 1;
+            }
+        }
     }
 }

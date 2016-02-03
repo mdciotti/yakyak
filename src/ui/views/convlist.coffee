@@ -1,4 +1,23 @@
-{nameof, nameofconv, fixlink} = require '../util'
+{nameof, nameofconv, fixlink, isImg} = require '../util'
+moment = require 'moment'
+
+format = (cont) ->
+    if cont?.attachment?.length > 0
+        # TODO: determine attachment type (photo, sticker, invite, voicemail, map, video)
+        # For now, just assume it's a photo
+        # if cont?.segment?.length > 0
+            # href = cont.segment[0]?.link_data?.link_target
+            # if isImg href
+                # return "Sent a photo"
+        return "Sent a photo"
+    txt = ""
+    for seg, i in cont?.segment ? []
+        # TODO: ensure compatibility with proxied message content
+        # continue if cont.proxied and i < 1
+        if seg.text
+            txt += seg.text
+        
+    return txt
 
 module.exports = view (models) ->
     {conv, entity, viewstate} = models
@@ -33,7 +52,14 @@ module.exports = view (models) ->
                                 image = "images/photo.jpg"
                             img src:fixlink(image), onerror: ->
                                 this.src = fixlink("images/photo.jpg")
-                span class:'convname', name
+                div class:'details', ->
+                    span class:'convname', name
+                    if viewstate.showConvThumbs
+                        m = c.event[c.event.length - 1]?.chat_message
+                        if m and m.message_content
+                            txt = format m.message_content
+                            span class:'lastmessage', txt
+                # div class:'time', moment(g.start / 1000).calendar()
                 if ur > 0 and not conv.isQuiet(c)
                     lbl = if ur >= conv.MAX_UNREAD then "#{conv.MAX_UNREAD}+" else ur + ''
                     span class:'unreadcount', lbl
